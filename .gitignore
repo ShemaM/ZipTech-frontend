@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/src/assets/styles.css
 /.pnp
 .pnp.js
 
@@ -12,7 +13,6 @@
 /build
 
 # misc
-src/assets/styles.css
 .DS_Store
 .env.local
 .env.development.local
