@@ -1,16 +1,18 @@
 import React from 'react';
-import StyledForm from './styles/index';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Nav from './components/Header';
+import OverviewScreen from './screens/OverviewScreen';
 
 function App() {
   return (
-    <StyledForm>
-      <form>
-        <input type='text' placeholder='Full name' />
-        <input type='text' placeholder='Email' />
-        <input type='text' placeholder='Password' />
-        <button type='button'>Sign In</button>
-      </form>
-    </StyledForm>
+    <Router>
+      <header>
+        <Nav />
+      </header>
+      <main className='mt-0'>
+        <OverviewScreen />
+      </main>
+    </Router>
   );
 }
 

@@ -18,6 +18,7 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/state-in-constructor": "off",
-    "jsx-quotes": "off"
+    "jsx-quotes": "off",
+    "object-curly-newline": "off"
   }
 }
