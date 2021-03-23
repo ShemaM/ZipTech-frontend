@@ -13,10 +13,14 @@ import SidebarItem from './SidebarItem';
 
 const Sidebar = () => (
   <>
-    <div className='bg-gray-900 h-screen'>
+    <div>
       <ul>
         <li>
-          <SidebarItem icon={<Sliders />} linkName='Dashboard' to='/overview' />
+          <SidebarItem
+            icon={<Sliders />}
+            linkName='Dashboard'
+            to='/dashboard'
+          />
           <SidebarItem
             icon={<MessageSquare />}
             linkName='Message'

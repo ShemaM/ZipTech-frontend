@@ -2,14 +2,14 @@ import React from 'react';
 import { Cpu, AlignJustify, Circle, Bell } from 'react-feather';
 
 const Header = () => (
-  <>
+  <header>
     <nav className='flex justify-between px-5 m-auto py-3 box-border fixed  top-0 left-0 right-0 bg-white  font-bold'>
       <ul className='flex'>
         <li>
           <Cpu />
         </li>
         <li className='px-10'>ZipTech</li>
-        <li className='pl-14'>
+        <li className='pl-12'>
           <AlignJustify />
         </li>
       </ul>
@@ -22,7 +22,7 @@ const Header = () => (
         </li>
       </ul>
     </nav>
-  </>
+  </header>
 );
 
 export default Header;
