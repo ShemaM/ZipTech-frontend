@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LOGO from '../../images/cpu.svg';
+import LOGO from '../../images/LOGO.svg';
 
 const ForgotPasswordScreen = () => (
   <>

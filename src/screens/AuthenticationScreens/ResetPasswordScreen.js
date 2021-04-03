@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import LOGO from '../../images/cpu.svg';
+import LOGO from '../../images/LOGO.svg';
 import Message from '../../components/Message';
 import { resetPassword } from '../../actions/userActions';
 

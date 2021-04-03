@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import LOGO from '../../images/cpu.svg';
+import LOGO from '../../images/LOGO.svg';
 import { forgotPassword } from '../../actions/userActions';
 import Message from '../../components/Message';
 
