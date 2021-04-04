@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
   USER_SIGNIN_FAIL,
@@ -13,7 +11,7 @@ import {
   USER_RESET_PASSWORD_FAIL,
 } from '../constants/userConstants';
 
-const url = '  http://localhost:4000/user';
+const url = 'https://ziptech-api.herokuapp.com/user';
 
 export const userSignin = (email, password) => async (dispatch) => {
   try {
@@ -37,7 +35,7 @@ export const userSignin = (email, password) => async (dispatch) => {
       type: USER_SIGNIN_SUCCESS,
       payload: data,
     });
-    localStorage.setItem('userData', JSON.stringify(data));
+    localStorage.setItem('userData', JSON.stringify(data.data.token));
   } catch (error) {
     dispatch({
       type: USER_SIGNIN_FAIL,

@@ -1,65 +1,95 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import LOGO from '../../images/LOGO.svg';
 import { forgotPassword } from '../../actions/userActions';
-import Message from '../../components/Message';
+import Spinner from '../../components/Spinner';
 
-const ForgotPasswordScreen = ({ location, history }) => {
+const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
 
-  const forgotPass = useSelector((state) => state.forgotPassword);
-  const { userEmail, error } = forgotPass;
+  const { register, handleSubmit, errors } = useForm();
 
-  const redirect = location.search
-    ? location.search.split('=')
-    : '/password_reset';
+  const forgotPass = useSelector((state) => state.forgotPassword);
+  const { loading, userEmail, error } = forgotPass;
 
   useEffect(() => {
     if (userEmail) {
-      history.push(redirect);
+      toast.success('Check your email for password reset link');
+    } else if (error) {
+      toast.error(error);
     }
-  }, [userEmail, history, redirect]);
+  }, [userEmail, error]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = () => {
     dispatch(forgotPassword(email));
   };
 
   return (
     <>
-      <div className='bg-gray-100  h-screen flex  justify-center'>
-        <form
-          onSubmit={submitHandler}
-          className='bg-white  shadow-xl flex flex-col h-2/5 md:w-1/4 items-center mt-10  py-5 focus:bg-red-600 justify-around border-gray-300'
-        >
-          <div className='flex flex-col justify-center items-center'>
-            <img className='w-10 pb-2' src={LOGO} alt='' />
-            <h1 className='text-lg md:text-xl'>Reset password</h1>
-          </div>
-          {error && <Message>{error}</Message>}
-          <div className='w-3/4 flex flex-col justify-between'>
-            <h1 className='text-gray-700 text-sm'>
-              Enter your user account verified email address and we will send
-              you a password reset link.
-            </h1>
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className='border-gray-200 border-2 hover:border-gray-400 outline-none mt-5 bg-gray-50'
-              type='text'
-              placeholder='Email address'
-            />
-          </div>
+      <div className='bg-login-100 h-screen font-sans flex flex-col items-center py-20'>
+        <div className=''>
+          <img src={LOGO} className='w-16' alt='' />
+        </div>
+        <div className='mt-10'>
+          <h1 className='text-2xl font-bold text-gray-300'>Reset Password</h1>
+        </div>
+        <div className='mt-5 w-1/2 h-full m-auto'>
+          <form onSubmit={handleSubmit(submitHandler)} className='py-5'>
+            <div className='flex flex-col items-center'>
+              <div className='mb-10'>
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className='bg-login-200 border-2 hover:border-login-300 border-login-200 text-white w-80 py-4 px-8 rounded-lg outline-none'
+                  type='email'
+                  name='email'
+                  placeholder='E-mail'
+                  ref={register({
+                    required: true,
+                    pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                  })}
+                />
+                <p className='col-span-2 text-red-500 text-center'>
+                  {errors.email && errors.email.type === 'required' && (
+                    <span role='alert'>No email provided</span>
+                  )}
+                </p>
 
-          <button
-            className='text-white bg-green-500 hover:bg-green-400 md:py-2 w-3/4'
-            type='submit'
-          >
-            Send reset password email
-          </button>
-        </form>
+                <p className='col-span-2 text-red-500 text-center'>
+                  {errors.email && errors.email.type === 'pattern' && (
+                    <span role='alert'>E-mail is not valid</span>
+                  )}
+                </p>
+              </div>
+              <div className='mb-5'>
+                {loading ? (
+                  <Spinner />
+                ) : (
+                  <button
+                    className='bg-login-300 border-none outline-none appearance-none hover:bg-white hover:text-login-300 py-3 px-8 w-80 text-white text-xl font-bold rounded-lg'
+                    type='submit'
+                  >
+                    Reset
+                  </button>
+                )}
+              </div>
+              <div className=''>
+                <Link
+                  className='text-login-300 hover:underline hover:text-green-500 text-xs'
+                  to='/login'
+                >
+                  Return to login
+                </Link>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );

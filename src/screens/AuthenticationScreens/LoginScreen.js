@@ -1,14 +1,12 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import LOGO from '../../images/LOGO.svg';
+import Spinner from '../../components/Spinner';
 import { userSignin } from '../../actions/userActions';
 
 toast.configure();
@@ -16,12 +14,12 @@ const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { register, handleSubmit, errors, reset } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { error, userData } = userLogin;
+  const { loading, error, userData } = userLogin;
 
   const redirect = location.search ? location.search.split('=') : '/dashboard';
 
@@ -33,13 +31,8 @@ const LoginScreen = ({ location, history }) => {
     }
   }, [history, userData, redirect, error]);
 
-  const notify = () => {
-    toast.error({ error });
-  };
-
   const submitHandler = () => {
     dispatch(userSignin(email, password));
-    reset();
   };
 
   return (
@@ -105,20 +98,23 @@ const LoginScreen = ({ location, history }) => {
               </div>
               <div className='mb-10'>
                 <Link
-                  className='text-login-300 hover:underline hover:text-green-500 text-lg'
+                  className='text-login-300 hover:underline hover:text-green-500 text-xs'
                   to='/forgot'
                 >
                   Don&apos;t Remember Password ?
                 </Link>
               </div>
               <div>
-                <button
-                  className='bg-login-300 border-none outline-none appearance-none hover:bg-white hover:text-login-300 py-3 px-8 w-80 text-white text-xl font-bold rounded-lg'
-                  type='submit'
-                  onClick={notify}
-                >
-                  login
-                </button>
+                {loading ? (
+                  <Spinner />
+                ) : (
+                  <button
+                    className='bg-login-300 border-none outline-none appearance-none hover:bg-white hover:text-login-300 py-3 px-8 w-80 text-white text-xl font-bold rounded-lg'
+                    type='submit'
+                  >
+                    login
+                  </button>
+                )}
               </div>
             </div>
           </form>
