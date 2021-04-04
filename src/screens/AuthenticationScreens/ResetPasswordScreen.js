@@ -9,7 +9,7 @@ import LOGO from '../../images/LOGO.svg';
 import { resetPassword } from '../../actions/userActions';
 import Spinner from '../../components/Spinner';
 
-const ResetPasswordScreen = ({ location, history }) => {
+const ResetPasswordScreen = ({ history }) => {
   const [newPassword, setNewPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
   const token = useLocation().search.split('?')[1];
@@ -21,12 +21,10 @@ const ResetPasswordScreen = ({ location, history }) => {
   const resetPass = useSelector((state) => state.resetPassword);
   const { loading, userPassword, error } = resetPass;
 
-  const redirect = location.search ? location.search.split('=') : '/login';
-
   useEffect(() => {
     if (userPassword) {
-      toast.success('Successfully changed password');
-      history.push(redirect);
+      toast.success('successfully changed password');
+      history.push('/login');
     } else if (error) {
       toast.error(error);
     }

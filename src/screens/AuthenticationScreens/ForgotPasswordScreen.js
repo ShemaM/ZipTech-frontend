@@ -9,7 +9,7 @@ import LOGO from '../../images/LOGO.svg';
 import { forgotPassword } from '../../actions/userActions';
 import Spinner from '../../components/Spinner';
 
-const ForgotPasswordScreen = () => {
+const ForgotPasswordScreen = ({ history }) => {
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
 
@@ -20,7 +20,8 @@ const ForgotPasswordScreen = () => {
 
   useEffect(() => {
     if (userEmail) {
-      toast.success('Check your email for password reset link');
+      history.push('/forgotmessage');
+      toast.success('Check your email for reset link');
     } else if (error) {
       toast.error(error);
     }
@@ -82,7 +83,7 @@ const ForgotPasswordScreen = () => {
               <div className=''>
                 <Link
                   className='text-login-300 hover:underline hover:text-green-500 text-xs'
-                  to='/login'
+                  to='/'
                 >
                   Return to login
                 </Link>

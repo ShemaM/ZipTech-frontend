@@ -10,7 +10,7 @@ import Spinner from '../../components/Spinner';
 import { userSignin } from '../../actions/userActions';
 
 toast.configure();
-const LoginScreen = ({ location, history }) => {
+const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,15 +21,13 @@ const LoginScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userData } = userLogin;
 
-  const redirect = location.search ? location.search.split('=') : '/dashboard';
-
   useEffect(() => {
     if (userData) {
-      history.push(redirect);
+      history.push('/dashboard');
     } else if (error) {
       toast.error(error);
     }
-  }, [history, userData, redirect, error]);
+  }, [history, userData, error]);
 
   const submitHandler = () => {
     dispatch(userSignin(email, password));
@@ -101,7 +99,7 @@ const LoginScreen = ({ location, history }) => {
                   className='text-login-300 hover:underline hover:text-green-500 text-xs'
                   to='/forgot'
                 >
-                  Don&apos;t Remember Password ?
+                  Don&apos;t Remember Password
                 </Link>
               </div>
               <div>
