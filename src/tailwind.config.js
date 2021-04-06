@@ -3,8 +3,12 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      gridTemplateColumns: {
-        Dashboard: '1fr 6fr;',
+      colors: {
+        login: {
+          100: '#013243',
+          200: '#2A4856',
+          300: '#02E079',
+        },
       },
     },
   },
