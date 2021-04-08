@@ -8,10 +8,13 @@ import {
   resetPasswordReducer,
 } from '../reducers/userReducers';
 
+import { productListReducer } from '../reducers/productReducers';
+
 const reducer = combineReducers({
   userLogin: userSigninReducer,
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
+  productList: productListReducer,
 });
 
 const userDataFromStorage = localStorage.getItem('userData')

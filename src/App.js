@@ -5,6 +5,7 @@ import LoginScreen from './screens/AuthenticationScreens/LoginScreen';
 import ForgetPasswordScreen from './screens/AuthenticationScreens/ForgotPasswordScreen';
 import ResetPasswordScreen from './screens/AuthenticationScreens/ResetPasswordScreen';
 import ForgotPassRedirectionScreen from './screens/AuthenticationScreens/ForgotPassRedirectionScreen';
+import ProductListScreen from './screens/DashboardScreens/ProductListScreen';
 import PrivateRoute from './screens/authentication/ProtectRoute';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route exact path='/' component={LoginScreen} />
       <Route exact path='/forgot' component={ForgetPasswordScreen} />
       <Route exact path='/user/reset' component={ResetPasswordScreen} />
+      <Route exact path='/product' component={ProductListScreen} />
       <Route
         exact
         path='/forgotmessage'
