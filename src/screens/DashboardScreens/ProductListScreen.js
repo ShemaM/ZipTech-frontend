@@ -4,9 +4,11 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Trash, Edit } from 'react-feather';
+import Skeleton from 'react-loading-skeleton';
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
+import ListsProductSkeleton from '../../skeletons/ListsProductSkeleton';
 import { listProduct, productDelete } from '../../actions/productActions';
 
 const ProductListScreen = () => {
@@ -65,32 +67,36 @@ const ProductListScreen = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map((product) => (
-                    <tr className='border-gray-200 border-2'>
-                      <td className='py-2'>{product.id}</td>
-                      <td className='py-2'>{product.name}</td>
-                      <td className='py-2'>{product.description}</td>
-                      <td className='py-2'>{product.brand}</td>
-                      <td className='py-2'>{product.category}</td>
-                      <td>
-                        <ul className='flex justify-center'>
-                          <li>
-                            <Link to='/edit_product'>
-                              <Edit className='border-white py-1 px-1 text-2xl  bg-white border-2' />
-                            </Link>
-                          </li>
-                          <li>
-                            <button
-                              type='button'
-                              onClick={() => deleteHandler(product.id)}
-                            >
-                              <Trash className='border-red-500 py-1 px-1 bg-red-500 border-2' />
-                            </button>
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                  ))}
+                  {loading ? (
+                    <ListsProductSkeleton />
+                  ) : (
+                    products.map((product) => (
+                      <tr className='border-gray-200 border-2'>
+                        <td className='py-2'>{product.id}</td>
+                        <td className='py-2'>{product.name}</td>
+                        <td className='py-2'>{product.description}</td>
+                        <td className='py-2'>{product.brand}</td>
+                        <td className='py-2'>{product.category}</td>
+                        <td>
+                          <ul className='flex justify-center'>
+                            <li>
+                              <Link to='/edit_product'>
+                                <Edit className='border-white py-1 px-1 text-2xl  bg-white border-2' />
+                              </Link>
+                            </li>
+                            <li>
+                              <button
+                                type='button'
+                                onClick={() => deleteHandler(product.id)}
+                              >
+                                <Trash className='border-red-500 py-1 px-1 bg-red-500 border-2' />
+                              </button>
+                            </li>
+                          </ul>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>
