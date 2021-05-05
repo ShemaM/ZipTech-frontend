@@ -11,7 +11,7 @@ import {
   DELETE_PRODUCT_FAIL,
 } from '../constants/productConstants';
 
-const url = 'http://localhost:4000/product/';
+const url = 'https://ziptech-api.herokuapp.com/product/';
 
 export const listProduct = () => async (dispatch, getState) => {
   try {

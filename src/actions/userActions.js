@@ -11,7 +11,7 @@ import {
   USER_RESET_PASSWORD_FAIL,
 } from '../constants/userConstants';
 
-const url = 'http://localhost:4000/user';
+const url = 'https://ziptech-api.herokuapp.com/user';
 
 export const userSignin = (email, password) => async (dispatch) => {
   try {
