@@ -4,7 +4,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Trash, Edit } from 'react-feather';
-import Skeleton from 'react-loading-skeleton';
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
